@@ -14,8 +14,9 @@ class Item extends Model
     protected $fillable = [
         'user_id',
         'name',
-        'type',
+        'type_id',
         'detail',
+        'image',
     ];
 
     /**
@@ -33,4 +34,10 @@ class Item extends Model
      */
     protected $casts = [
     ];
+
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+        // この商品は一つの種別に属している (逆の関係もTypeモデル内で定義する)
+    }
 }
