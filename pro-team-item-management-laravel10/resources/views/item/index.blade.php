@@ -3,7 +3,7 @@
 @section('title', '商品一覧')
 
 @section('content_header')
-    <h1>商品一覧</h1>
+<h1>商品一覧</h1>
 @stop
 
 <!-- CSSファイルを追加 -->
@@ -29,13 +29,14 @@
                     </form>
                     <!-- 検索結果件数を表示 -->
                     @if (count($items) === 0)
-                        <p>該当の商品は見つかりませんでした</p>
+                    <p>該当の商品は見つかりませんでした</p>
                     @else
                     <p>{{ count($items) }} 件の商品が見つかりました</p>
                     @endif
                 </div>
-                
+
                 <!-- 商品登録ボタン -->
+                @can('isAdmin')
                 <div class="card-tools">
                     <div class="input-group input-group-sm">
                         <div class="input-group-append">
@@ -43,6 +44,8 @@
                         </div>
                     </div>
                 </div>
+                @else
+                @endcan
             </div>
         </div>
     </div>
@@ -53,81 +56,90 @@
     <table class="table table-hover text-nowrap">
         <thead>
             <tr>
-            <th><a href="{{ route('items.index', ['sort' => 'id', 'order' => 'asc']) }}">ID <i class="fas fa-arrow-up"></i></a></th>
-            <th><a href="{{ route('items.index', ['sort' => 'name', 'order' => 'asc']) }}">名前 <i class="fas fa-arrow-up"></i></a></th>
-            <th><a href="{{ route('items.index', ['sort' => 'type_id', 'order' => 'asc']) }}">種別 <i class="fas fa-arrow-up"></i></a></th>
-            <th>詳細</th>
-            <th>画像(クリックで拡大表示)</th>
-            <th>操作</th>
+                <th scope="col">@sortablelink('id', 'ID')</th>
+                <th scope="col">@sortablelink('name', '名前')</th>
+                <th scope="col">@sortablelink('type_id', '種別')</th>
+                <th>詳細</th>
+                <th>画像(クリックで拡大表示)</th>
+                @can('isAdmin')
+                <th>操作</th>
+                @else
+                @endcan
             </tr>
         </thead>
-            <tbody>
-                @foreach ($items as $item)
-                <tr>
-                    <td>{{ $item->id }}</td>
-                    <td>{{ $item->name }}</td>
-                    <td>{{ $item->type->name }}</td>
-                    <td>{{ $item->detail }}</td>
+        <tbody>
+            @foreach ($items as $item)
+            <tr>
+                <td>{{ $item->id }}</td>
+                <td>{{ $item->name }}</td>
+                <td>{{ $item->type->name }}</td>
+                <td>{{ $item->detail }}</td>
 
-                    <!-- モーダル機能実装 -->
-                    <td>
-                        <!-- Button trigger modal -->
-                        <button type="button" style="width: 25%; height: auto; border: none; background-color: #fff;" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $item->id }}" >
-                            @if ($item->image)
-                                <a href="data:image/png;base64,{{ $item->image }}" data-lightbox="item-images">
-                                    <img src="data:image/png;base64,{{ $item->image }}" style="width: auto; height: 75px; float:left;">
-                                </a>
-                            @endif
-                        </button>
-                    
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ $item->id }}" aria-hidden="true">
+                <!-- モーダル機能実装 -->
+                <td>
+                    <!-- Button trigger modal -->
+                    <button type="button" style="width: 25%; height: auto; border: none; background-color: #fff;" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $item->id }}">
+                        @if ($item->image)
+                        <a href="data:image/png;base64,{{ $item->image }}" data-lightbox="item-images">
+                            <img src="data:image/png;base64,{{ $item->image }}" style="width: auto; height: 75px; float:left;">
+                        </a>
+                        @endif
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ $item->id }}" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel{{ $item->id }}">プレビュー</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                @if ($item->image)
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel{{ $item->id }}">プレビュー</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    @if ($item->image)
                                     <a href="data:image/png;base64,{{ $item->image }}" data-lightbox="item-images">
                                         <img src="data:image/png;base64,{{ $item->image }}" style="width: 100%;">
                                     </a>
-                                @endif
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            </div>
+                                    @endif
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
                             </div>
                         </div>
-                        </div>
-                    </td>
+                    </div>
+                </td>
 
-                    <td>
-                        <!-- 編集ボタン -->
-                        <a href="/items/edit/{{ $item->id }}" class="edit-button btn btn-primary">編集</a>
+                @can('isAdmin')
+                <td>
+                    <!-- 編集ボタン -->
+                    <a href="/items/edit/{{ $item->id }}" class="edit-button btn btn-primary">編集</a>
 
-                        <!-- 削除ボタン -->
-                        <form action="{{ url('items/delete') }}" method="post"
-                            onsubmit="return confirm('削除します。よろしいですか？');">
-                            @csrf
-                            <input type="hidden" name="id" value="{{ $item->id }}">
-                            <input type="submit" value="削除" class="btn btn-danger">
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-                
-            </tbody>
-            <!-- csv出力 -->
-            <div class="csv-area">
-                <form action="/items/csv" method="get">
+                    <!-- 削除ボタン -->
+                    <form action="{{ url('items/delete') }}" method="post" onsubmit="return confirm('削除します。よろしいですか？');">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $item->id }}">
+                        <input type="submit" value="削除" class="btn btn-danger">
+                    </form>
+                </td>
+                @else
+                <!-- <p>なにも表示しない</p> -->
+                @endcan
+            </tr>
+            @endforeach
 
-                    <button type="submit">CSV出力</button>
-                </form>
-            </div>
+        </tbody>
+        <!-- csv出力 -->
+        <div class="csv-area">
+            <form action="/items/csv" method="get">
+
+                <button type="submit" style="margin-bottom: 10px;">CSV出力</button>
+            </form>
+        </div>
     </table>
 </div>
+
+
+
 @stop
 
 @section('css')

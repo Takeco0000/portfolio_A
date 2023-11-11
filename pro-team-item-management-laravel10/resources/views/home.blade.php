@@ -3,11 +3,13 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>商品管理システムへようこそ</h1>
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+    <br>
+    <p>左サイドバー「商品一覧」をクリック</p>
+    <p>※userの場合、登録・編集・削除はご利用いただけません</p>
 @stop
 
 @section('css')

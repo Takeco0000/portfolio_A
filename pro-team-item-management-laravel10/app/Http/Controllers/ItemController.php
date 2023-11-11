@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
@@ -24,23 +25,20 @@ class ItemController extends Controller
 
 
 
+
     /**
      * 商品一覧
      */
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $sort = $request->input('sort', 'id'); // デフォルトはIDでソート
-        $order = $request->input('order', 'asc'); // デフォルトは昇順
-    
-        $items = Item::where(function ($query) use ($search) {
+
+        $items = Item::sortable()->where(function ($query) use ($search) {
             $query->where('name', 'like', '%' . $search . '%')
                 ->orWhere('id', 'like', '%' . $search . '%')
                 ->orWhere('type_id', 'like', '%' . $search . '%')
                 ->orWhere('detail', 'like', '%' . $search . '%');
-        })
-        ->orderBy($sort, $order) // ソートを適用
-        ->get();
+        })->get();
     
         return view('item.index', compact('items'));
     }

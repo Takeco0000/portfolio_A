@@ -3,7 +3,7 @@
 @section('title', '商品情報編集')
 
 @section('content_header')
-    <h1>商品情報編集</h1>
+<h1>商品情報編集</h1>
 @stop
 
 @section('content')
@@ -21,9 +21,9 @@
                         <label for="type_id">種別</label>
                         <select name="type_id" id="type_id" class="form-control">
                             @foreach ($types as $type)
-                                <option value="{{ $type->id }}" {{ $item->type_id == $type->id ? 'selected' : '' }}>
-                                    {{ $type->name }}
-                                </option>
+                            <option value="{{ $type->id }}" {{ $item->type_id == $type->id ? 'selected' : '' }}>
+                                {{ $type->name }}
+                            </option>
                             @endforeach
                         </select>
                     </div>
@@ -39,11 +39,11 @@
                         <!-- Lightbox JavaScript -->
                         <script src="{{ asset('js/lightbox.min.js') }}"></script>
                         @if ($item->image)
-                            <td>
-                                <a href="data:image/png;base64,{{ $item->image }}" data-lightbox="item-images">
-                                    <img src="data:image/png;base64,{{ $item->image }}" style="width: 40%;">
-                                </a>
-                            </td>
+                        <td>
+                            <a href="data:image/png;base64,{{ $item->image }}" data-lightbox="item-images">
+                                <img src="data:image/png;base64,{{ $item->image }}" style="width: 40%;">
+                            </a>
+                        </td>
                         @endif
                     </div>
                 </div>
@@ -51,8 +51,8 @@
                 <div class="form-group">
                     <p>※新たにファイルを選択して更新すると、<br>
                         　上記の写真は消えてしまいます。</p>
-                        <label for="image"></label>
-                        <input type="file" name="image" id="image">      
+                    <label for="image"></label>
+                    <input type="file" name="image" id="image">
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">更新</button>

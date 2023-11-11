@@ -3,9 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable; // 追加
 
 class Item extends Model
 {
+
+    /**
+     * composer require kyslik/column-sortableのパッケージをインストールする必要あり
+     */
+    use Sortable;  // 追加
+
+
+
     /**
      * The attributes that are mass assignable.
      *
@@ -40,4 +49,6 @@ class Item extends Model
         return $this->belongsTo(Type::class);
         // この商品は一つの種別に属している (逆の関係もTypeモデル内で定義する)
     }
+    
+    
 }
