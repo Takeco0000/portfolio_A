@@ -46,17 +46,23 @@
                         </td>
                         @endif
                     </div>
+                    <!-- 写真選択 -->
+                    <div class="form-group" style="padding-top: 15px;">
+                        <label for="image">画像</label>
+                        <br>
+                        <input type="file" name="image" id="image">
+                        <p style="font-weight: bold;">
+                            ※新たにファイルを選択して更新すると、<br>
+                            　上記の写真は消えてしまいます。<br>
+                        </p>
+                            ※画像ファイルのみ<br>※サイズ50MB以下必須
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">更新</button>
+                    </div>
+                    
                 </div>
-                <!-- 写真選択 -->
-                <div class="form-group">
-                    <p>※新たにファイルを選択して更新すると、<br>
-                        　上記の写真は消えてしまいます。</p>
-                    <label for="image"></label>
-                    <input type="file" name="image" id="image">
-                </div>
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">更新</button>
-                </div>
+                
             </form>
         </div>
     </div>

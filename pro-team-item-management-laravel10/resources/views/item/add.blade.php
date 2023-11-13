@@ -43,9 +43,13 @@
                         <input type="text" class="form-control" id="detail" name="detail" placeholder="詳細説明">
                     </div>
 
-                    <input type="file" name="image">
-                    ※画像ファイルのみ
-                    ※サイズ50MB以下必須
+                    <div class="form-group" style="padding-top: 15px;">
+                        <label for="image">画像</label>
+                        <br>
+                        <input type="file" name="image">
+                        <br>※画像ファイルのみ<br>※サイズ50MB以下必須
+                    </div>
+
                 </div>
 
                 <div class="card-footer">
