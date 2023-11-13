@@ -44,6 +44,8 @@
                     </div>
 
                     <input type="file" name="image">
+                    ※画像ファイルのみ
+                    ※サイズ50MB以下必須
                 </div>
 
                 <div class="card-footer">
