@@ -68,8 +68,11 @@ class ItemController extends Controller
         ]);
 
 
-        // 商品登録
-        $image = base64_encode(file_get_contents($request->image->getRealPath()));
+        // 商品登録2
+        $image = null; // デフォルトnullに設定
+        if ($request->hasFile('image')) {
+            $image = base64_encode(file_get_contents($request->image->getRealPath()));
+        }
         Item::create([
             'user_id' => Auth::user()->id,
             'name' => $request->name,
