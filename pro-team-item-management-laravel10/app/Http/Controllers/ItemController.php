@@ -61,10 +61,12 @@ class ItemController extends Controller
         $request->validate([
             'name' => 'required|max:100',
             'type_id' => 'required',
+            'image' => 'max:50',
         ],[
             'name.required' => '名前は必須入力です。',
             'name.max' => '名前は100文字以内で入力してください。',
             'type_id.required' => '種別は必須です。',
+            'image' => 'サイズを50KB以下に変更してください。'
         ]);
 
 

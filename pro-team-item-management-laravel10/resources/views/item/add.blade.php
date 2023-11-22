@@ -47,7 +47,7 @@
                         <label for="image">画像</label>
                         <br>
                         <input type="file" name="image">
-                        <br>※画像ファイルのみ<br>※サイズ50MB以下必須
+                        <br>※画像ファイルのみ<br>※サイズ50KB以下必須
                     </div>
 
                 </div>

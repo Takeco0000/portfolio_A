@@ -55,7 +55,7 @@
                             ※新たにファイルを選択して更新すると、<br>
                             　上記の写真は消えてしまいます。<br>
                         </p>
-                            ※画像ファイルのみ<br>※サイズ50MB以下必須
+                            ※画像ファイルのみ<br>※サイズ50KB以下必須
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">更新</button>
