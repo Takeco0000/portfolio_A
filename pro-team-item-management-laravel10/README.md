@@ -15,15 +15,15 @@
 - 商品csv出力
 
 ## 開発環境
-PHP 7.4　← 使用しているPHPのバージョンを記入しましょう
-MySQL 14.14　← 使用しているMySQLのバージョンを記入しましょう
-Laravel 8.75　← 使用しているLaravelのバージョンを記入しましょう
+PHP 7.4
+MySQL 14.14
+Laravel 10
 
 ## システム閲覧
 [アプリケーションページへ](https://portfolio-murata-f312d14a8b94.herokuapp.com/login)
 
 ### テストアカウント情報
 ```
-メールアドレス : 
-パスワード : 
+メールアドレス : koukai@gmail.com
+パスワード : 00000000
 ```
